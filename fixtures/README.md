@@ -1,7 +1,7 @@
 # Fixtures
 Pytest takes a different approach. It leads you toward explicit dependency declarations that are still reusable thanks to the availability of fixtures. 
 
-Pytest fixtures are functions that can create data, test doubles, or initialize system state for the test suite. Fixtures are functions that can return a wide range of values. Each test that depends on a fixture must explicitly accept that fixture as an argument, so dependencies are always stated up front:
+> Pytest fixtures are functions that can create data, test doubles, or initialize system state for the test suite. Fixtures are functions that can return a wide range of values. Each test that depends on a fixture must explicitly accept that fixture as an argument, so dependencies are always stated up front:
 ```
 # fixture_demo.py
 
@@ -20,7 +20,7 @@ Fixtures can also make use of other fixtures, again by declaring them explicitly
 
 ## When to Create Fixtures - 
 
-While writing several tests that all make use of the same underlying test data, then a fixture can be used to pull the repeated data into a single function decorated with @pytest.fixture to indicate that the function is a pytest fixture.  
+> While writing several tests that all make use of the same underlying test data, then a fixture can be used to pull the repeated data into a single function decorated with @pytest.fixture to indicate that the function is a pytest fixture.  
 
 Imagine you’re writing a function, format_data_for_display(), to process the data returned by an API endpoint. The data represents a list of people, each with a given name, family name, and job title. The function should output a list of strings that include each person’s full name (their given_name followed by their family_name), a colon, and their title:
 ```
@@ -118,7 +118,7 @@ Sayid,Khan,Project Manager
 Be sure to name your fixture something specific. That way, you can quickly determine if you want to use it when writing new tests in the future!
 
 ## When to Avoid Fixtures - 
-Fixtures are great for extracting data or objects that you use across multiple tests. However, they aren’t always as good for tests that require slight variations in the data. Littering your test suite with fixtures is no better than littering it with plain data or objects. It might even be worse because of the added layer of indirection.
+> Fixtures are great for extracting data or objects that you use across multiple tests. However, they aren’t always as good for tests that require slight variations in the data. Littering your test suite with fixtures is no better than littering it with plain data or objects. It might even be worse because of the added layer of indirection.
 
 Nevertheless, fixtures will likely be an integral part of your test suite. As your project grows in scope, the challenge of scale starts to come into the picture. One of the challenges facing any kind of tool is how it handles being used at scale, and luckily, pytest has a bunch of useful features that can help you manage the complexity that comes with growth.
 
@@ -128,10 +128,9 @@ In pytest, fixtures are modular. Being modular means that fixtures can be import
 
 pytest looks for a conftest.py module in each directory. If you add your general-purpose fixtures to the conftest.py module, then you’ll be able to use that fixture throughout the module’s parent directory and in any subdirectories without having to import it. This is a great place to put your most widely used fixtures.
 
-Another interesting use case for fixtures and conftest.py is in guarding access to resources. Imagine that you’ve written a test suite for code that deals with API calls. You want to ensure that the test suite doesn’t make any real network calls even if someone accidentally writes a test that does so.  
+> Another interesting use case for fixtures and conftest.py is in guarding access to resources. Imagine that you’ve written a test suite for code that deals with API calls. You want to ensure that the test suite doesn’t make any real network calls even if someone accidentally writes a test that does so.  
 pytest provides a monkeypatch fixture to replace values and behaviors, which you can use to great effect:
 ```
-
 # conftest.py
 
 import pytest
